@@ -17,6 +17,7 @@ function App() {
           <Redirect to='/login'/>
         </Route>
         {login && <Route path='/login'><Redirect to='/home' /></Route>}
+        {!login && <Route path='/home'><Redirect to='/login'/></Route>}
         <Route path='/login'>
            <Login />
         </Route>

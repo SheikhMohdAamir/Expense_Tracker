@@ -11,12 +11,16 @@ const CartProvider = (props) => {
         setToken(id)
         localStorage.setItem('token', id)
     }
-    
+    const logoutHandler = () => {
+        setToken(null)
+        localStorage.removeItem('token')
+    }
 
     const cartContext = {
         token:token,
         login:isLoggedIn,
-        loginHandler:loginHandler
+        loginHandler:loginHandler,
+        logoutHandler:logoutHandler
     }
 
   return (

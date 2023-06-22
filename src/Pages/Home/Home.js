@@ -19,6 +19,9 @@ const Home = () => {
         alert('Authentication Failed')
       }
   }
+  const logoutHandler = () =>{
+      api.logoutHandler()
+  }
 
   return (
     <div >
@@ -29,6 +32,7 @@ const Home = () => {
       </div>
       <div className='container-fluid'>
         <button type="button" className="btn" style={{backgroundColor:'#6f42c1',color:'white'}} onClick={emailVerificationHandler}>Verify Your Email</button>
+        <button type="button" className="btn" style={{backgroundColor:'#6f42c1',color:'white'}} onClick={logoutHandler}>Logout</button>
       </div>  
       
     </div>
