@@ -4,6 +4,7 @@ import Home from "./Pages/Home/Home";
 import { useContext } from "react";
 import CartContext from "./Pages/ContextAPI/cart-context";
 import Profile from "./Pages/Profile/Profile";
+import Forgotpassword from "./Pages/Forgotpassword/Forgotpassword";
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path='/profile'>
           <Profile />
+        </Route>
+        <Route path='/forgotpassword'>
+          <Forgotpassword />
         </Route>
         <Route path='*'>
           <h3>404 Error</h3>

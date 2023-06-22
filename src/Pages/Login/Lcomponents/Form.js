@@ -4,6 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useContext } from 'react'
 import CartContext from '../../ContextAPI/cart-context'
+import { NavLink } from 'react-router-dom/cjs/react-router-dom'
 
 const Form = () => {
     const [login, setLogin] = useState(false)
@@ -81,7 +82,6 @@ const Form = () => {
             <label htmlFor="exampleInputPassword2" className="form-label">Confirm Password</label>
             <input type="password" className="form-control" id="exampleInputPassword2" ref={refConfirmPassword} required />
         </div>
-        
         <button type="submit" className="btn" style={{backgroundColor:'#6f42c1',color:'white'}}>Sign Up</button>
       </form>}
 
@@ -96,12 +96,12 @@ const Form = () => {
             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
             <input type="password" className="form-control" id="exampleInputPassword1" ref={refPassword} required/>
         </div>
-    
+        <p style={{textAlign:'center'}}><NavLink to='/forgotpassword'>Forgot Password!</NavLink></p>
         <button type="submit" className="btn" style={{backgroundColor:'#6f42c1',color:'white'}}>Login</button>
       </form>}
-      
         <br/>
         <br/>
+        
         <button type="button" className="btn btn-secondary btn-lg" onClick={changeFormHandler}>{login? "Don't have an account! Sign Up" :"Already have an account! Login"}</button>
     </div>
   )
