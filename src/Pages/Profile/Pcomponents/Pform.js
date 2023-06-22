@@ -6,8 +6,10 @@ import axios from 'axios';
 
 const Pform = () => {
 
-    const api = useContext(CartContext)
     
+
+    const api = useContext(CartContext)
+    const idToken = api.token
     const fName = useRef('');
     const photo = useRef('');
 
@@ -15,7 +17,7 @@ const Pform = () => {
         event.preventDefault()
         const fNameValue = fName.current.value
         const photoValue = photo.current.value
-        const idToken = api.token
+        
         
         try{
             const resolve = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBvPlrcP-qrxgVmLiysw_vxDD-3g1jj1W8',{idToken:idToken, displayName:fNameValue, photoUrl:photoValue, returnSecureToken:true})
@@ -31,6 +33,26 @@ const Pform = () => {
 
     }
 
+    const previosDataHandler = async() =>{
+        let previousName;
+        let previousphoto;
+        try{
+            const resolve = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBvPlrcP-qrxgVmLiysw_vxDD-3g1jj1W8',{idToken:idToken})
+            const data = resolve.data.users
+
+            for(let key in data){
+                previousName = data[key].displayName
+                previousphoto = data[key].photoUrl
+            }
+            fName.current.value = previousName
+            photo.current.value = previousphoto
+        }
+        catch(error){
+            console.log('In Profile Form',error)
+        }
+    }
+
+
   return (
     <div className='container-sm ' style={{paddingLeft:'400px',paddingRight:'400px',paddingTop:'100px'}}>
         <form onSubmit={profileUpdateHandler}> 
@@ -44,7 +66,8 @@ const Pform = () => {
         </div>
         <button type="submit" className="btn" style={{backgroundColor:'#6f42c1',color:'white'}}>Update</button>
         </form>
-      
+        <br/>
+        <button type="button" className="btn btn-secondary btn-lg" onClick={previosDataHandler}>Show Previous User Data</button>
     </div>
   )
 }
