@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom/cjs/react-router-dom";
 import Home from "./Pages/Home/Home";
 import { useContext } from "react";
 import CartContext from "./Pages/ContextAPI/cart-context";
+import Profile from "./Pages/Profile/Profile";
 
 function App() {
 
@@ -21,6 +22,12 @@ function App() {
         </Route>
         <Route path='/home'>
           <Home />
+        </Route>
+        <Route path='/profile'>
+          <Profile />
+        </Route>
+        <Route path='*'>
+          <h3>404 Error</h3>
         </Route>
       </Switch>
     </div>
