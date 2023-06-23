@@ -4,7 +4,8 @@ import { useState } from 'react'
 
 const CartProvider = (props) => {
     const [token, setToken] = useState(null)
-    const [data, setdata] = useState([])
+    const [edit, setEdit] = useState(false)
+    const [editToken, setEditToken] = useState('')
 
     let isLoggedIn = !!token
 
@@ -16,9 +17,10 @@ const CartProvider = (props) => {
         setToken(null)
         localStorage.removeItem('token')
     }
-    const dataHandler = (d) => {
-        setdata([...data,d])
-        console.log(data)
+    const editHandler = (id) => {
+        setEdit(true)
+        setEditToken(id)
+
     }
 
     const cartContext = {
@@ -26,8 +28,10 @@ const CartProvider = (props) => {
         login:isLoggedIn,
         loginHandler:loginHandler,
         logoutHandler:logoutHandler,
-        data:data,
-        dataHandler:dataHandler
+        edit:edit,
+        editHandler:editHandler,
+        editToken:editToken,
+
     }
 
   return (
