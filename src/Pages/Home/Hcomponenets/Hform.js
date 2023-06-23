@@ -1,29 +1,30 @@
 import React from 'react'
 import { useRef } from 'react'
-import { useContext } from 'react'
-import CartContext from '../../ContextAPI/cart-context'
+import axios from 'axios'
 
 const Hform = () => {
 
-    const api = useContext(CartContext)
 
     const amount = useRef('')
     const category = useRef('')
     const desc = useRef('')
     
-    const transactionHandler = (event) => {
+    const transactionHandler = async(event) => {
         event.preventDefault()
 
         const inputAmount = amount.current.value
         const inputCategory = category.current.value
         const inputDesc = desc.current.value
         
-        const transactionData = {
-            amount: inputAmount,
-            category: inputCategory,
-            description: inputDesc
+        try{
+            const resolve = await axios.post('https://expense-tracker--signup-page-default-rtdb.firebaseio.com/transactions.json',{amount:inputAmount, category:inputCategory, description: inputDesc})
+            const data = resolve.data
+            console.log(data)
         }
-        api.dataHandler(transactionData)
+        catch(error){
+            alert('Authentication Failed')
+        }
+
         amount.current.value = ''
         desc.current.value = ''
             
@@ -33,6 +34,9 @@ const Hform = () => {
 
   return (
     <div style={{width:'40%', float:'right', paddingRight:'60px',paddingTop:'40px'}}>
+
+                                 {/* TRANSACTION */}
+
       <h3 style={{color:'#6f42c1', textAlign:'center'}}>Transaction</h3>
       <form onSubmit={transactionHandler}>
         <div className="mb-3">
